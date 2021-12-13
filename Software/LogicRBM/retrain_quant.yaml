@@ -1,0 +1,90 @@
+#Type of thing to be trained, Multiplier or Adder
+type: MergeMult
+model_name: 8BitMergeMult_200320_2
+#Number of bits of model
+NUM_BITS : 8
+
+#Options for the dataset generation
+dataset:
+  size : 1048576
+  #Randomnly generated, or sequential?
+  random : false
+  #Preallocate Memory?
+  prealloc : true
+  #Shuffle items before usage?
+  shuffle : true
+  #Size of block to allocate. -1 means allocate the full block
+  block_size : -1
+
+#This tells what the output quantization parameters should be
+quant:
+  #Number of output bits
+  bits: 8
+  #Location of output point (indexed from right)
+  point: 5
+
+max_train:
+  #Batch Size
+  BATCH_SIZE : 256
+  #Number of hidden units to train with
+  CD_K : 4000
+  #Number of Sub epochs to run, after each epochs params change
+  #i.e. learning rate, CDK, etc.
+  SUPER_EPOCHS: 1
+  #How many epochs to train with the same dataset, and no param changes
+  SUB_EPOCHS : 10
+  #Initial learning rate (before decay)
+  LEARN_RATE : 0.01
+  #Weight decay
+  WEIGHT_DECAY : !!float 1e-8
+  #After each SUPER_EPOCH, the learning rate decreases by this amount
+  LEARNING_DECAY : 1
+  #After each SUPER_EPOCH, the CD_K increases by this amount
+  CDK_GROWTH_RATE: 2
+  #Number of cases to test with after each sub_epoch
+  NUM_CASES : 100
+  #Number of samples to test with after each sub_epoch
+  NUM_SAMPLES : 10000
+  #Number of cases to test with after each super_epoch
+  NUM_CASES_SUPER: 200
+  #Number of samples to test with after each SUPER_EPOCHS
+  NUM_SAMPLES_SUPER: 100000
+
+quant_train:
+  #Batch Size
+  BATCH_SIZE : 256
+  #Number of hidden units to train with
+  CD_K : 3000
+  #Number of Sub epochs to run, after each epochs params change
+  #i.e. learning rate, CDK, etc.
+  SUPER_EPOCHS: 3
+  #How many epochs to train with the same dataset, and no param changes
+  SUB_EPOCHS : 10
+  #Initial learning rate (before decay)
+  LEARN_RATE : 0.01
+  #Weight decay
+  WEIGHT_DECAY : !!float 1e-7
+  #Quantization decay
+  QUANT_DECAY : !!float 1e-6
+  #After each super epoch, the quantization decay goes up by this amount
+  QUANT_GROWTH_RATE : 2
+  #After each SUPER_EPOCH, the learning rate decreases by this amount
+  LEARNING_DECAY : 1
+  #After each SUPER_EPOCH, the CD_K increases by this amount
+  CDK_GROWTH_RATE: 1
+  #Number of cases to test with after each sub_epoch
+  NUM_CASES : 100
+  #Number of samples to test with after each sub_epoch
+  NUM_SAMPLES : 10000
+  #Number of cases to test with after each super_epoch
+  NUM_CASES_SUPER: 200
+  #Number of samples to test with after each SUPER_EPOCHS
+  NUM_SAMPLES_SUPER: 1000000
+
+
+#Use CUDA?
+CUDA : True
+#If Using CUDA, which device to put it on?
+DEVICE: cuda:0
+#Use PCD?
+PCD : False

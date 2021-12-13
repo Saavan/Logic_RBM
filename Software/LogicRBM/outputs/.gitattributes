@@ -1,0 +1,7 @@
+hitTimes.p filter=lfs diff=lfs merge=lfs -text
+Mult8-long.p filter=lfs diff=lfs merge=lfs -text
+MultTimeCompare_200204.p filter=lfs diff=lfs merge=lfs -text
+PRNG_testing_211209_0.p filter=lfs diff=lfs merge=lfs -text
+PRNG_testing_211209_1.p filter=lfs diff=lfs merge=lfs -text
+hitFact_raw.p filter=lfs diff=lfs merge=lfs -text
+hitTimes(2).p filter=lfs diff=lfs merge=lfs -text

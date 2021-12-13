@@ -1,0 +1,51 @@
+#Type of thing to be trained, Multiplier or Adder
+type: Mult
+mult_name: Mult4
+adder_name: FA4 
+
+#Number of bits of merged multiplier
+NUM_BITS : 8
+
+#Options for the dataset generation
+dataset:
+  size : 1048576
+  #Randomnly generated, or sequential?
+  random : false
+  #Preallocate Memory?
+  prealloc : true
+  #Shuffle items before usage?
+  shuffle : true
+  #Size of block to allocate. -1 means allocate the full block
+  block_size : -1
+
+#Batch Size
+BATCH_SIZE : 256
+#Starting number of contrastive divergence steps
+CD_K : 1000
+#Number of Sub epochs to run, after each epochs params change
+#i.e. learning rate, CDK, etc.
+SUPER_EPOCHS: 7
+#How many epochs to train with the same dataset, and no param changes
+SUB_EPOCHS : 20
+#Initial learning rate (before decay)
+LEARN_RATE : 0.01
+#Weight decay
+WEIGHT_DECAY : !!float 1e-6
+#After each SUPER_EPOCH, the learning rate decreases by this amount
+LEARNING_DECAY : 1
+#After each SUPER_EPOCH, the CD_K increases by this amount
+CDK_GROWTH_RATE: !!float 1.5
+#Number of cases to test with after each sub_epoch
+NUM_CASES : 50
+#Number of samples to test with after each sub_epoch
+NUM_SAMPLES : 100000
+#Number of cases to test with after each super_epoch
+NUM_CASES_SUPER: 200
+#Number of samples to test with after each SUPER_EPOCHS
+NUM_SAMPLES_SUPER: 1000000
+#Use CUDA?
+CUDA : True
+#If Using CUDA, which device to put it on?
+DEVICE: cuda:1
+#Use PCD?
+PCD : False
